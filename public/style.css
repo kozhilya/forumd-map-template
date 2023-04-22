@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+}
+
+.map-container {
+    --max-height: 600px;
+    
+    max-height: var(--max-height);
+    position: relative;
+    overflow: hidden;
+}
+.map-container.has-hover {
+    cursor: pointer;
+}
+
+.map-info {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 20%;
+    margin: 0;
+    padding: 0;
+
+    background: #000000A0;
+    color: #FFFFFFFF;
+    display: none;
+}
+.map-info button {
+    float: right;
+    margin: 0 0 0 0;
+    padding: 3px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.map-info h2 {
+    margin: 0 0 .5em;
+
+    background-color: #134361;
+    font-family: 'OSWALD';
+    font-style: normal;
+    line-height: 26px;
+    letter-spacing: 2px;
+    padding: 0 10px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.map-info .description {
+    padding: 0 .3em;
+}
+
+.map-info p {
+    margin: .3em 0;
+}
+
+.map-container.has-active .map-info {
+    display: block;
+}
+
+.map-fullscreen {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: block;
+
+    background-color: #000000B0;
+    border-radius: 5px;
+    color: #FFFFFFFF;
+    margin: 15px 0 0;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+
+.map-tooltip {
+    position: absolute;
+    display: block;
+
+    background-color: #000000B0;
+    border-radius: 5px;
+    color: #FFFFFFFF;
+    margin: 15px 0 0;
+    padding: 5px 15px;
+    pointer-events: none;
+    opacity: 0;
+
+    transition: .5s opacity;
+}
+.map-container.has-hover .map-tooltip {
+    opacity: 1;
+}
+
+
+.map-svg-wrapper {
+    width: 100%;
+    max-height: var(--max-height);
+}
+
+.map-svg {
+    display: block;
+    width: 100%;
+    max-height: var(--max-height);
+    background-color: black;
+}
+
+
+.map-mask .map-mask-bg {
+    fill: #FFFFFFFF;
+    transition: .5s all;
+} 
+.has-hover .map-mask .map-mask-bg, 
+.has-active .map-mask .map-mask-bg {
+    fill: #000000FF;
+}
+
+
+.map-mask :not(.map-mask-bg) {
+    fill: #FFFFFF00;
+}
+
+.map-mask .hover:not(.map-mask-bg) {
+    fill: #FFFFFFFF;
+}
+
+.map-container.has-active .map-mask .hover:not(.map-mask-bg) {
+    fill: #FFFFFF80;
+}
+.map-container.has-active .map-mask .active:not(.map-mask-bg) {
+    fill: #FFFFFFFF;
+}
+
+.map-image {
+    opacity: 0.5;
+}
+
+.map-overlay {
+    mask: url(#map-mask);
+}
+
+.map-hover-elements * {
+    fill: transparent;
+    stroke: transparent;
+}

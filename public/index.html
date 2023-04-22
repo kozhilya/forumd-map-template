@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест карты</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="http://kozhilyafdmap.mybb.ru/js/libs.min.js?v=2"></script>
+    <script src="map.js"></script>
+</head>
+
+<body>
+    <div class="map-container">
+        <div class="map-info">
+            <button>❌</button>
+            <div class="map-info-content"></div>
+        </div>
+
+        <div class="map-tooltip"></div>
+
+        <div class="map-svg-wrapper">
+            <svg class="map-svg">
+                <defs>
+                    <mask class="map-mask" id="map-mask">
+                        <rect class="map-mask-bg svg-full-size" x="0" y="0">
+
+                    </mask>
+                </defs>
+
+                <image class="map-image svg-full-size" xlink:href="" />
+                <image class="map-overlay svg-full-size" xlink:href="" />
+
+                <g class="map-hover-elements">
+
+                </g>
+                <!-- <use class="map-overlay" href="#map-mask"> -->
+            </svg>
+        </div>
+        
+        <button class="map-fullscreen">&#x26F6;</button>
+    </div>
+
+    <script>Init({
+            container: '.map-container',
+            map: 'image.webp',
+            svg: 'map.svg',
+            descriptions: 'descriptions.html',
+        });</script>
+</body>
+
+</html>
