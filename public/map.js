@@ -98,6 +98,7 @@ class MapClass {
         return new Promise(resolve => {
             $.ajax({
                 url: this.settings.descriptions,
+                contentType: `text/plain; charset=${this.settings.unicode ? 'utf-8' : 'windows-1251'}`,
                 success: (response) => {
                     const html = $('<div></div>').html(response);
 
@@ -177,6 +178,8 @@ class MapClass {
             $('.map-tooltip', this.container)
                 .css('left', e.offsetX + 'px')
                 .css('top', e.offsetY + 'px')
+        }).on('fullscreenchange', e => {
+            this.container.toggleClass('fullscreen', !!document.fullscreenElement);
         });
 
         $('.map-info button', this.container).on('click', e => {

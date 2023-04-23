@@ -3,3 +3,4 @@ node_modules
 *.svg
 *.jpg
 *.webp
+public/descriptions.html

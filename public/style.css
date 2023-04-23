@@ -98,12 +98,18 @@ body {
     width: 100%;
     max-height: var(--max-height);
 }
+.map-container.fullscreen .map-svg-wrapper {
+    max-height: 100vh;
+}
 
 .map-svg {
     display: block;
     width: 100%;
     max-height: var(--max-height);
     background-color: black;
+}
+.map-container.fullscreen .map-svg {
+    max-height: 100vh;
 }
 
 
