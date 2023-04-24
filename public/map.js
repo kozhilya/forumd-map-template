@@ -94,25 +94,36 @@ class MapClass {
         console.log(mapElement.id);
     }
 
-    async loadDescriptions() {
-        return new Promise(resolve => {
-            $.ajax({
-                url: this.settings.descriptions,
-                contentType: `text/plain; charset=${this.settings.unicode ? 'utf-8' : 'windows-1251'}`,
-                success: (response) => {
-                    const html = $('<div></div>').html(response);
+    fixEncoding(response) {
+        return new Promise(async (resolve) => {
+            const text = await response.clone().text();
 
-                    $('.element-content', html).each((i, element) => {
-                        const id = element.id;
-                        this.elements[id].addTexts(
-                            $('h2', element).html(),
-                            $('.description', element).html(),
-                        );
-                    })
-
-                    resolve();
-                }
+            if(!/\uFFFD/g.test(text)) {
+                // Нет невалидных символов UTF-8
+                resolve(text);
+                return;
+            }
+            
+            const blob = await response.blob();
+            const reader = new FileReader();
+            reader.addEventListener('loadend', function () {
+                resolve(reader.result);
             });
+            reader.readAsText(blob, 'CP1251');
+        });
+    }
+
+    async loadDescriptions() {
+        const response = await fetch(this.settings.descriptions);
+        const code = await this.fixEncoding(response);
+        const html = $('<div></div>').html(code);
+
+        $('.element-content', html).each((i, element) => {
+            const id = element.id;
+            this.elements[id].addTexts(
+                $('h2', element).html(),
+                $('.description', element).html(),
+            );
         });
     }
 
